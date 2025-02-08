@@ -99,11 +99,11 @@ function PostCard({
         )}
       </CardContent>
       <CardFooter className="w-full flex flex-col gap-1 items-start py-3">
-        <div className="">Id : {item.id ? item.id : "No Id"}</div>
-        <div className="">
+        <div className="text-[1.5rem]" role="">Id : {item.id ? item.id : "No Id"}</div>
+        <div className="text-[1.5rem]">
           Caption : {item.caption ? item.caption : "No Caption"}
         </div>
-        <div className="">
+        <div className="text-[1.5rem]">
           Date : {item.timestamp ? item.timestamp : "No Date"}
         </div>
         <Link href={item.permalink} className="border-b-2">
