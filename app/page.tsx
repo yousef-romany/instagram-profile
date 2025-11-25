@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     try {
       fetch(
@@ -12,15 +14,29 @@ export default function Home() {
         .then((res) => res.json())
         .then((resData) => {
           console.log(resData);
-          setData(resData.data);
+          setData(resData.data || []);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching Instagram data:", error);
+          setLoading(false);
         });
     } catch (error) {
-      console.log(error);
+      console.error("Error:", error);
+      setLoading(false);
     }
   }, []);
+
   return (
-    <div className="">
-      <InstagramPreview data={data} />
-    </div>
+    <main className="min-h-screen">
+      <header className="sr-only">
+        <h1>Zoe Holidays Instagram Gallery</h1>
+        <p>
+          Explore our travel photography collection featuring stunning
+          destinations and adventure moments
+        </p>
+      </header>
+      <InstagramPreview data={data} loading={loading} />
+    </main>
   );
 }
